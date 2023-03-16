@@ -8,11 +8,9 @@ def index():
     return render_template('base.html', title='Заготовка')
 
 
-@app.route('/countdown')
-def countdown():
-    countdown_list = [str(x) for x in range(10, 0, -1)]
-    countdown_list.append('Пуск!')
-    return '</br>'.join(countdown_list)
+@app.route('/new')
+def new():
+    return "hello!!"
 
 
 if __name__ == '__main__':

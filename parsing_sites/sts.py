@@ -1,8 +1,6 @@
+from bs4 import BeautifulSoup
 import requests
 
-json_data = [11849]
-
-res = requests.post('https://www.wildberries.ru/webapi/poo/byids', json=json_data)
-print(res)
-a = res.json()
-print('рейтинг', a['value']['11849']['rate'])
+res = requests.get('https://ctc.ru/programm')
+soup = BeautifulSoup(res.text, 'lxml')
+print(soup.find("a", class_= "Link_link__5+N3C"))

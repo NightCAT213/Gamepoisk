@@ -14,4 +14,3 @@ for i in a:
     games.append(i[0:index])
 games = list(set(games))
 print(games)
-

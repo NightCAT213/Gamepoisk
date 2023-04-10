@@ -13,9 +13,9 @@ def login():
     return render_template('loginpage.html')
 
 
-@app.route('/singin')
-def sing():
-    return render_template('singinpage.html')
+@app.route('/signin')
+def sign():
+    return render_template('signinpage.html')
 
 ''' если полльзователь вошел в аккаунт
 @app.route('/hpageacc')

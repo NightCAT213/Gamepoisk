@@ -13,7 +13,7 @@ def login():
     return render_template('loginpage.html')
 
 
-@app.route('/signin')
+@app.route('/singin')
 def sing():
     return render_template('singinpage.html')
 

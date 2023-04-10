@@ -9,13 +9,13 @@ def index():
 
 
 @app.route('/login')
-def new():
+def login():
     return render_template('loginpage.html')
 
 
-@app.route('/signip')
-def new():
-    return render_template('signinpage.html')
+@app.route('/signin')
+def sing():
+    return render_template('singinpage.html')
 
 ''' если полльзователь вошел в аккаунт
 @app.route('/hpageacc')

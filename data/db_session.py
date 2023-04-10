@@ -27,3 +27,10 @@ def add_user(nameus, passwordus):
     session.add(c)
     session.commit()
 
+
+def check_user(login, password):
+    global session
+    q = session.query(Users.id).filter(Users.name == login, Users.password == password)
+    if session.query(q.exists()).scalar():
+        return 'Такой пользователь уже существет'
+    return ''

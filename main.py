@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
@@ -17,7 +17,8 @@ def login():
 def sign():
     return render_template('signinpage.html')
 
-''' если полльзователь вошел в аккаунт
+
+''' если пользователь вошел в аккаунт
 @app.route('/hpageacc')
 def new():
     return render_template('hpage_acc.html')

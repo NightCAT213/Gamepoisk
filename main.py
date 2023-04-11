@@ -59,8 +59,29 @@ def you():
         check = 'Такого пользователя не существует'
         return render_template('loginpage.html', fail_log=check)
     else:
-        act_name = db_session.add_user(bar, bur, session) + '  '
+        act_name = bar + '  '
         return render_template('hpage_acc.html', form_name=act_name)
+
+
+@app.route('/h', methods=['GET', 'POST'])
+def h():
+    global act_name
+    act_name = 0
+    return render_template('homepage.html')
+
+
+@app.route('/s', methods=['GET', 'POST'])
+def s():
+    global act_name
+    act_name = 0
+    return render_template('signinpage.html', fail_sign='')
+
+
+@app.route('/l', methods=['GET', 'POST'])
+def lo():
+    global act_name
+    act_name = 0
+    return render_template('loginpage.html', fail_log='')
 
 
 if __name__ == '__main__':

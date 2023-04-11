@@ -23,16 +23,17 @@ def account():
     return render_template('accountswitch.html', form_name=act_name)
 
 
-@app.route('/catalog')
-def some_sum():
-    q = request.args.get['q']
-    print(q.value)
-    return render_template('catalog.html')
-
-
 @app.route('/signin')
 def sign():
     return render_template('signinpage.html', fail_sign='')
+
+
+@app.route('/katalog')
+def cat():
+    if act_name == 0:
+        return render_template('catalog.html')
+    else:
+        return render_template('catalog_acc.html', form_name=act_name)
 
 
 @app.route('/get-text', methods=['GET', 'POST'])

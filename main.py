@@ -31,9 +31,9 @@ def sign():
 @app.route('/katalog')
 def cat():
     if act_name == 0:
-        return render_template('catalog.html')
+        return render_template('catalog.html', n=3)
     else:
-        return render_template('catalog_acc.html', form_name=act_name)
+        return render_template('catalog_acc.html', form_name=act_name, n=1)
 
 
 @app.route('/get-text', methods=['GET', 'POST'])

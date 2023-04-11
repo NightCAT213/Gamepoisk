@@ -34,6 +34,14 @@ def foo():
     check = ''
     bar = request.form['login']
     bur = request.form['password']
+    if len(bar) < 1:
+        if len(bur) < 8:
+            return render_template('signinpage.html', fail_sign='Пароль и логин слишком короткие')
+        else:
+            return render_template('signinpage.html', fail_sign="Логин слишком короткий")
+    else:
+        if len(bur) < 8:
+            return render_template('signinpage.html', fail_sign='Пароль слишком короткий')
     from data import db_session
     db_session.global_init("db/users_base.sqlite")
     session = db_session.create_session()

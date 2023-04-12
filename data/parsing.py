@@ -1,7 +1,6 @@
-import sqlite3
+from bs4 import BeautifulSoup
+import requests
 
-con = sqlite3.connect('../db/sites_base.sqlite')
-cur = con.cursor()
-rows = len(cur.execute("SELECT * FROM sites").fetchall())
-titels = cur.execute("SELECT name FROM sites").fetchall()
-print(titels)
+
+def pars(link):
+    res = requests.get('https://www.babybus.com/global/ru/index')

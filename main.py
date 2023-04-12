@@ -31,6 +31,9 @@ def sign():
 @app.route('/katalog')
 def cat():
     if act_name == 0:
+        from data import db_session
+        db_session.global_init("db/sites_base.sqlite")
+        session = db_session.create_session()
         return render_template('catalog.html', n=3)
     else:
         return render_template('catalog_acc.html', form_name=act_name, n=1)

@@ -44,15 +44,18 @@
             </div>
         </div>
     </div>
-    {% for i in range(n) %}<div class="card" style="margin: auto;margin-top: 40px;width: 90%;">
+    {% set names = {{ game_names }} %}
+    {% set types = {{ game_types }} %}
+    {% set descriptions = {{ game_descriptions }} %}
+    {% for i in range(n)%}<div class="card" style="margin: auto;margin-top: 40px;width: 90%;">
         <div class="card-body">
             <!-- Start: 1 Row 2 Columns -->
             <div class="container">
                 <div class="row">
                     <div class="col-md-6" style="width: 70%;">
-                        <h4>Title</h4>
-                        <h6 class="text-muted mb-2">Subtitle</h6>
-                        <p>Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus.</p><a href="#">Link</a>
+                        <h4>{{names[i][0]}}</h4>
+                        <h6 class="text-muted mb-2">{{types[i]}}</h6>
+                        <p>{{game_descriptions[i]}}</p><a href="#">Link</a>
                     </div>
                     <div class="col-md-6 col-lg-3" style="width: 30%;"><img width="237" height="151" src="/static/assets/img/horse.png?h=3acc8fcf85ea3348cdaf10744dcc706c"></div>
                 </div>

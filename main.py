@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request
+import sqlite3
 app = Flask(__name__)
-
 act_name = 0
 
 
@@ -30,11 +30,19 @@ def sign():
 
 @app.route('/katalog')
 def cat():
+    db_file = 'db/sites_base.sqlite'
+    con = sqlite3.connect(db_file)
+    cur = con.cursor()
+    rows = len(cur.execute("SELECT * FROM sites").fetchall())
+    titels = cur.execute("SELECT name FROM sites").fetchall()
+    type = cur.execute("SELECT type FROM sites").fetchall()
+    age = cur.execute("SELECT age FROM sites").fetchall()
+    type_age = [type[i][0] + ', ' + age[i][0] for i in range(len(type))]
+    description = cur.execute("SELECT link FROM sites").fetchall()
+    for i in description:
+        pass
     if act_name == 0:
-        from data import db_session
-        db_session.global_init("db/sites_base.sqlite")
-        session = db_session.create_session()
-        return render_template('catalog.html', n=3)
+        return render_template('catalog.html', n=rows)
     else:
         return render_template('catalog_acc.html', form_name=act_name, n=1)
 

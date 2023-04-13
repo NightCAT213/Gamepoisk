@@ -42,17 +42,21 @@
             </div>
         </div>
     </div>
-    {% for i in range(n) %}<div class="card" style="margin: auto;margin-top: 40px;width: 90%;">
+    {% set names = game_names %}
+    {% set types = game_types %}
+    {% set descriptions = game_descriptions %}
+    {% set links = game_links %}
+    {% for i in range(n)%}<div class="card" style="margin: auto;margin-top: 40px;width: 90%;">
         <div class="card-body">
             <!-- Start: 1 Row 2 Columns -->
             <div class="container">
                 <div class="row">
                     <div class="col-md-6" style="width: 70%;">
-                        <h4>{{ game_name }}</h4>
-                        <h6 class="text-muted mb-2">{{ type }}</h6>
-                        <p>{{ description }}</p><a href="#">Link</a>
+                        <h4>{{names[i][0]}}</h4>
+                        <h6 class="text-muted mb-2">{{types[i]}}</h6>
+                        <p>{{game_descriptions[i]}}</p><a href="{{ links[i][0] }}">{{ links[i][0] }}</a>
                     </div>
-                    <div class="col-md-6 col-lg-3" style="width: 30%;"><img width="237" height="151" src="/static/assets/img/horse.png?h=98e7ac5c97ca321e90fcf9d6a1618d6a"></div>
+                    <div class="col-md-6 col-lg-3" style="width: 30%;"><img width="237" height="151" src="/static/assets/img/horse.png?h=3acc8fcf85ea3348cdaf10744dcc706c"></div>
                 </div>
             </div><!-- End: 1 Row 2 Columns -->
         </div>

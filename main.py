@@ -38,15 +38,17 @@ def cat():
     type = cur.execute("SELECT type FROM sites").fetchall()
     age = cur.execute("SELECT age FROM sites").fetchall()
     type_age = [type[i][0] + ', ' + age[i][0] for i in range(len(type))]
+    links = cur.execute("SELECT link FROM sites").fetchall()
     description = []
     for i in titles:
         from parsing_sites import connection
         description.append(connection.pars(i[0]))
     if act_name == 0:
         return render_template('catalog.html', n=rows, game_names=titles, game_types=type_age,
-                               game_descriptions=description)
+                               game_descriptions=description, game_links=links)
     else:
-        return render_template('catalog_acc.html', form_name=act_name, n=1)
+        return render_template('catalog_acc.html', form_name=act_name, n=rows, game_names=titles, game_types=type_age,
+                               game_descriptions=description, game_links=links)
 
 
 @app.route('/get-text', methods=['GET', 'POST'])

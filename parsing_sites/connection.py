@@ -1,7 +1,89 @@
 from bs4 import BeautifulSoup
 import requests
 
-# пример запроса меток
+
+def pars(title):
+    if title == "BabyBus":
+        res = requests.get('https://www.babybus.com/global/ru/index')
+        soup = BeautifulSoup(res.text, 'lxml')
+        a = str(soup.find_all('div', class_='index_cont__8GUDo'))
+        a = a[len('[<div class="index_cont__8GUDo">   '):-len('</div>]')]
+        print(a)
+    if title == 'Играемся':
+        res = requests.get('https://www.igraemsa.ru/')
+        soup = BeautifulSoup(res.text, 'lxml')
+        a = str(soup.find_all('p'))
+        a = a[len('[<p>В играх новые знания усваиваются гораздо легче! Именно поэтому <b>детские'
+                  ' развивающие игры</b> – это прекрасный способ сделать процесс обучения ребёнка увлекательным'
+                  ' и более эффективным.</p>, <p>'):-1284]
+    if title == 'Саго Мини':
+        a = 'Коллекция из более чем 40 обучающих игр «Мир Sago Mini: Игры для детей» предназначена для дошкольников' \
+            ' от 2 до 5 лет. Вместе с героями Sago — Харви, Джинджей, Робином и Джеком — малыши исследуют космос, ' \
+            'встретятся с динозаврами, построят робота, совершат глубоководное погружение, научатся управлять ' \
+            'пожарной машиной и т.д. Кроме того, в «Мир Sago Mini: Игры для детей» можно создать до 5 собственных' \
+            ' персонажей и придумывать собственные истории. Открытый мир игры поощряет детей использовать воображение' \
+            ' и креативность на полную мощь! У вас, как у родителей, есть выбор: присоединиться к детским' \
+            ' развлечениям или следить за игрой через специальное приложение Sago Mini Parents, которое ежедневно' \
+            ' предоставляет фотоснимки, видео и обновления.'
+    if title == 'Вульфмания':
+        res = requests.get('https://wulfmania.com/')
+        soup = BeautifulSoup(res.text, 'lxml')
+        b = str(soup.find_all('p', limit=5)).split('</p>, <p>')
+        b = ''.join(b).split('\n')
+        a = []
+        for i in range(len(b)):
+            b[i] = b[i].strip()
+            if b[i] != '</p>]' and b[i] != '[<p>':
+                a.append(b[i])
+        f = a[0]
+        b = a[1:]
+        a = f
+        for i in range(len(b) - 1):
+            op = b[i].endswith('!')
+            if b[i + 1] == '' and op is not True:
+                a = a + b[i] + '. '
+            elif b[i + 1] != '' and op is not True:
+                a = a + b[i] + ' '
+            elif b[i + 1] == '' and op is True:
+                a = a + b[i]
+        a += '.'
+    if title == 'Айкьюша':
+        res = requests.get('https://iqsha.ru/')
+        soup = BeautifulSoup(res.text, 'lxml')
+        a = soup.find_all('p', limit=5)
+        b = a[1:]
+        a = b
+        for i in range(len(a)):
+            if str(a[i]).startswith('<p>') and str(a[i]).endswith('</p>'):
+                a[i] = str(a[i])[3:-4]
+        a = ''.join(a)
+        a = a.split('\n')
+        for i in range(len(a)):
+            a[i] = a[i].strip()
+            if i == 0:
+                b = a[i][:len(
+                    'Задания и упражнения на сайте нацелены на всестороннее развитие детей разных возрастных групп.')]
+                c = a[i][
+                    len('Задания и упражнения на сайте нацелены на всестороннее развитие детей разных возрастных групп.<span class="purple">'):len(
+                        'Задания и упражнения на сайте нацелены на всестороннее развитие детей разных возрастных групп.<span class="purple">Для малышей от 2 до 4 лет')]
+                d = a[i][
+                    len('Задания и упражнения на сайте нацелены на всестороннее развитие детей разных возрастных групп.<span class="purple">Для малышей от 2 до 4 лет</span>'):]
+                a[i] = b + ' ' + c + d
+            if i == 1:
+                b = a[i][:len('стимулирующие тягу к знаниям и позволяющие легко усваивать новый материал.')]
+                c = a[i][
+                    len('стимулирующие тягу к знаниям и позволяющие легко усваивать новый материал.<span class="purple">'):len(
+                        'стимулирующие тягу к знаниям и позволяющие легко усваивать новый материал.<span class="purple">Для детей-дошкольников от 5 до 7 лет')]
+                d = a[i][
+                    len('стимулирующие тягу к знаниям и позволяющие легко усваивать новый материал.<span class="purple">Для детей-дошкольников от 5 до 7 лет</span>'):]
+                a[i] = b + ' ' + c + d
+        a = ' '.join(a)
+    if title == '':
+        pass
+    return a
+
+
+'''# пример запроса меток
 res = requests.get('https://kanobu.ru/games/popular')
 soup = BeautifulSoup(res.text, 'lxml')
 a = str(soup.find_all('div', class_='knb-cell'))
@@ -13,4 +95,4 @@ for i in a:
     index = i.find("/")
     games.append(i[0:index])
 games = list(set(games))
-print(games)
+print(games)'''

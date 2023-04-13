@@ -2,5 +2,32 @@ from bs4 import BeautifulSoup
 import requests
 
 
-def pars(link):
-    res = requests.get('https://www.babybus.com/global/ru/index')
+def pars(title):
+    pass
+
+
+res = requests.get('https://iqsha.ru/')
+soup = BeautifulSoup(res.text, 'lxml')
+a = soup.find_all('p', limit=5)
+b = a[1:]
+a = b
+for i in range(len(a)):
+    if str(a[i]).startswith('<p>') and str(a[i]).endswith('</p>'):
+        a[i] = str(a[i])[3:-4]
+a = ''.join(a)
+a = a.split('\n')
+for i in range(len(a)):
+    a[i] = a[i].strip()
+    if i == 0:
+        b = a[i][:len('Задания и упражнения на сайте нацелены на всестороннее развитие детей разных возрастных групп.')]
+        c = a[i][len('Задания и упражнения на сайте нацелены на всестороннее развитие детей разных возрастных групп.<span class="purple">'):len('Задания и упражнения на сайте нацелены на всестороннее развитие детей разных возрастных групп.<span class="purple">Для малышей от 2 до 4 лет')]
+        d = a[i][len('Задания и упражнения на сайте нацелены на всестороннее развитие детей разных возрастных групп.<span class="purple">Для малышей от 2 до 4 лет</span>'):]
+        a[i] = b + ' ' + c + d
+    if i == 1:
+        b = a[i][:len('стимулирующие тягу к знаниям и позволяющие легко усваивать новый материал.')]
+        c = a[i][len('стимулирующие тягу к знаниям и позволяющие легко усваивать новый материал.<span class="purple">'):len('стимулирующие тягу к знаниям и позволяющие легко усваивать новый материал.<span class="purple">Для детей-дошкольников от 5 до 7 лет')]
+        d = a[i][len('стимулирующие тягу к знаниям и позволяющие легко усваивать новый материал.<span class="purple">Для детей-дошкольников от 5 до 7 лет</span>'):]
+        a[i] = b + ' ' + c + d
+a = ' '.join(a)
+# a = a[len('[<p>В играх новые знания усваиваются гораздо легче! '):-1284]
+print(a)

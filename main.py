@@ -34,13 +34,14 @@ def cat():
     con = sqlite3.connect(db_file)
     cur = con.cursor()
     rows = len(cur.execute("SELECT * FROM sites").fetchall())
-    titels = cur.execute("SELECT name FROM sites").fetchall()
+    titles = cur.execute("SELECT name FROM sites").fetchall()
     type = cur.execute("SELECT type FROM sites").fetchall()
     age = cur.execute("SELECT age FROM sites").fetchall()
     type_age = [type[i][0] + ', ' + age[i][0] for i in range(len(type))]
-    description = cur.execute("SELECT link FROM sites").fetchall()
-    for i in description:
-        pass
+    description = []
+    for i in titles:
+        from parsing_sites import connection
+        description.append(connection.pars(i))
     if act_name == 0:
         return render_template('catalog.html', n=rows)
     else:

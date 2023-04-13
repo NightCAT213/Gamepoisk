@@ -3,6 +3,7 @@ import requests
 
 
 def pars(title):
+    a = 'fail'
     if title == "BabyBus":
         res = requests.get('https://www.babybus.com/global/ru/index')
         soup = BeautifulSoup(res.text, 'lxml')

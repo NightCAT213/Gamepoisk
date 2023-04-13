@@ -76,6 +76,126 @@ def video():
                                game_descriptions=description, game_links=links, game_img=img)
 
 
+@app.route('/games')
+def games():
+    db_file = 'db/sites_base.sqlite'
+    con = sqlite3.connect(db_file)
+    cur = con.cursor()
+    rows = len(cur.execute("SELECT * FROM sites WHERE type in ('Игры')").fetchall())
+    titles = cur.execute("SELECT name FROM sites WHERE type in ('Игры')").fetchall()
+    type = cur.execute("SELECT type FROM sites WHERE type in ('Игры')").fetchall()
+    age = cur.execute("SELECT age FROM sites WHERE type in ('Игры')").fetchall()
+    type_age = [type[i][0] + ', ' + age[i][0] for i in range(len(type))]
+    links = cur.execute("SELECT link FROM sites WHERE type in ('Игры')").fetchall()
+    img = cur.execute("SELECT img FROM sites WHERE type in ('Игры')").fetchall()  # width="237" height="151"
+    description = []
+    for i in titles:
+        from parsing_sites import connection
+        description.append(connection.pars(i[0]))
+    if act_name == 0:
+        return render_template('catalog.html', n=rows, game_names=titles, game_types=type_age,
+                               game_descriptions=description, game_links=links, game_img=img)
+    else:
+        return render_template('catalog_acc.html', form_name=act_name, n=rows, game_names=titles, game_types=type_age,
+                               game_descriptions=description, game_links=links, game_img=img)
+
+
+@app.route('/less')
+def less():
+    db_file = 'db/sites_base.sqlite'
+    con = sqlite3.connect(db_file)
+    cur = con.cursor()
+    rows = len(cur.execute("SELECT * FROM sites WHERE type in ('Развивающие занятия')").fetchall())
+    titles = cur.execute("SELECT name FROM sites WHERE type in ('Развивающие занятия')").fetchall()
+    type = cur.execute("SELECT type FROM sites WHERE type in ('Развивающие занятия')").fetchall()
+    age = cur.execute("SELECT age FROM sites WHERE type in ('Развивающие занятия')").fetchall()
+    type_age = [type[i][0] + ', ' + age[i][0] for i in range(len(type))]
+    links = cur.execute("SELECT link FROM sites WHERE type in ('Развивающие занятия')").fetchall()
+    img = cur.execute("SELECT img FROM sites WHERE type in ('Развивающие занятия')").fetchall()  # width="237" height="151"
+    description = []
+    for i in titles:
+        from parsing_sites import connection
+        description.append(connection.pars(i[0]))
+    if act_name == 0:
+        return render_template('catalog.html', n=rows, game_names=titles, game_types=type_age,
+                               game_descriptions=description, game_links=links, game_img=img)
+    else:
+        return render_template('catalog_acc.html', form_name=act_name, n=rows, game_names=titles, game_types=type_age,
+                               game_descriptions=description, game_links=links, game_img=img)
+
+
+@app.route('/two-three')
+def two_three():
+    db_file = 'db/sites_base.sqlite'
+    con = sqlite3.connect(db_file)
+    cur = con.cursor()
+    rows = len(cur.execute("SELECT * FROM sites WHERE age in ('от 2-3 лет')").fetchall())
+    titles = cur.execute("SELECT name FROM sites WHERE age in ('от 2-3 лет')").fetchall()
+    type = cur.execute("SELECT type FROM sites WHERE age in ('от 2-3 лет')").fetchall()
+    age = cur.execute("SELECT age FROM sites WHERE age in ('от 2-3 лет')").fetchall()
+    type_age = [type[i][0] + ', ' + age[i][0] for i in range(len(type))]
+    links = cur.execute("SELECT link FROM sites WHERE age in ('от 2-3 лет')").fetchall()
+    img = cur.execute("SELECT img FROM sites WHERE age in ('от 2-3 лет')").fetchall()  # width="237" height="151"
+    description = []
+    for i in titles:
+        from parsing_sites import connection
+        description.append(connection.pars(i[0]))
+    if act_name == 0:
+        return render_template('catalog.html', n=rows, game_names=titles, game_types=type_age,
+                               game_descriptions=description, game_links=links, game_img=img)
+    else:
+        return render_template('catalog_acc.html', form_name=act_name, n=rows, game_names=titles, game_types=type_age,
+                               game_descriptions=description, game_links=links, game_img=img)
+
+
+@app.route('/three-four')
+def three_four():
+    db_file = 'db/sites_base.sqlite'
+    con = sqlite3.connect(db_file)
+    cur = con.cursor()
+    rows = len(cur.execute("SELECT * FROM sites WHERE age in ('от 3-4 лет')").fetchall())
+    titles = cur.execute("SELECT name FROM sites WHERE age in ('от 3-4 лет')").fetchall()
+    type = cur.execute("SELECT type FROM sites WHERE age in ('от 3-4 лет')").fetchall()
+    age = cur.execute("SELECT age FROM sites WHERE age in ('от 3-4 лет')").fetchall()
+    type_age = [type[i][0] + ', ' + age[i][0] for i in range(len(type))]
+    links = cur.execute("SELECT link FROM sites WHERE age in ('от 3-4 лет')").fetchall()
+    img = cur.execute("SELECT img FROM sites WHERE age in ('от 3-4 лет')").fetchall()  # width="237" height="151"
+    description = []
+    for i in titles:
+        from parsing_sites import connection
+        description.append(connection.pars(i[0]))
+    if act_name == 0:
+        return render_template('catalog.html', n=rows, game_names=titles, game_types=type_age,
+                               game_descriptions=description, game_links=links, game_img=img)
+    else:
+        return render_template('catalog_acc.html', form_name=act_name, n=rows, game_names=titles, game_types=type_age,
+                               game_descriptions=description, game_links=links, game_img=img)
+
+
+@app.route('/four-five')
+def four_five():
+    db_file = 'db/sites_base.sqlite'
+    con = sqlite3.connect(db_file)
+    cur = con.cursor()
+    rows = len(cur.execute("SELECT * FROM sites WHERE age in ('от 4-5 лет')").fetchall())
+    titles = cur.execute("SELECT name FROM sites WHERE age in ('от 4-5 лет')").fetchall()
+    type = cur.execute("SELECT type FROM sites WHERE age in ('от 4-5 лет')").fetchall()
+    age = cur.execute("SELECT age FROM sites WHERE age in ('от 4-5 лет')").fetchall()
+    type_age = [type[i][0] + ', ' + age[i][0] for i in range(len(type))]
+    links = cur.execute("SELECT link FROM sites WHERE age in ('от 4-5 лет')").fetchall()
+    img = cur.execute("SELECT img FROM sites WHERE age in ('от 4-5 лет')").fetchall()  # width="237" height="151"
+    description = []
+    for i in titles:
+        from parsing_sites import connection
+        description.append(connection.pars(i[0]))
+    if act_name == 0:
+        return render_template('catalog.html', n=rows, game_names=titles, game_types=type_age,
+                               game_descriptions=description, game_links=links, game_img=img)
+    else:
+        return render_template('catalog_acc.html', form_name=act_name, n=rows, game_names=titles, game_types=type_age,
+                               game_descriptions=description, game_links=links, game_img=img)
+
+
 @app.route('/get-text', methods=['GET', 'POST'])
 def foo():
     global act_name

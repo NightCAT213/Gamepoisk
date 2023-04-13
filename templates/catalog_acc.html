@@ -46,6 +46,7 @@
     {% set types = game_types %}
     {% set descriptions = game_descriptions %}
     {% set links = game_links %}
+    {% set img = game_img %}
     {% for i in range(n)%}<div class="card" style="margin: auto;margin-top: 40px;width: 90%;">
         <div class="card-body">
             <!-- Start: 1 Row 2 Columns -->
@@ -56,7 +57,7 @@
                         <h6 class="text-muted mb-2">{{types[i]}}</h6>
                         <p>{{game_descriptions[i]}}</p><a href="{{ links[i][0] }}">{{ links[i][0] }}</a>
                     </div>
-                    <div class="col-md-6 col-lg-3" style="width: 30%;"><img width="237" height="151" src="/static/assets/img/horse.png?h=3acc8fcf85ea3348cdaf10744dcc706c"></div>
+                    <div class="col-md-6 col-lg-3" style="width: 30%;"><img width="237" height="151" src="{{ img[i][0] }}"></div>
                 </div>
             </div><!-- End: 1 Row 2 Columns -->
         </div>

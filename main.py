@@ -105,13 +105,13 @@ def less():
     db_file = 'db/sites_base.sqlite'
     con = sqlite3.connect(db_file)
     cur = con.cursor()
-    rows = len(cur.execute("SELECT * FROM sites WHERE type in ('Развивающие занятия')").fetchall())
-    titles = cur.execute("SELECT name FROM sites WHERE type in ('Развивающие занятия')").fetchall()
-    type = cur.execute("SELECT type FROM sites WHERE type in ('Развивающие занятия')").fetchall()
-    age = cur.execute("SELECT age FROM sites WHERE type in ('Развивающие занятия')").fetchall()
+    rows = len(cur.execute("SELECT * FROM sites WHERE type in ('Развлекательные занятия')").fetchall())
+    titles = cur.execute("SELECT name FROM sites WHERE type in ('Развлекательные занятия')").fetchall()
+    type = cur.execute("SELECT type FROM sites WHERE type in ('Развлекательные занятия')").fetchall()
+    age = cur.execute("SELECT age FROM sites WHERE type in ('Развлекательные занятия')").fetchall()
     type_age = [type[i][0] + ', ' + age[i][0] for i in range(len(type))]
-    links = cur.execute("SELECT link FROM sites WHERE type in ('Развивающие занятия')").fetchall()
-    img = cur.execute("SELECT img FROM sites WHERE type in ('Развивающие занятия')").fetchall()  # width="237" height="151"
+    links = cur.execute("SELECT link FROM sites WHERE type in ('Развлекательные занятия')").fetchall()
+    img = cur.execute("SELECT img FROM sites WHERE type in ('Развлекательные занятия')").fetchall()  # width="237" height="151"
     description = []
     for i in titles:
         from parsing_sites import connection

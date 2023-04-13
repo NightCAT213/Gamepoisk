@@ -52,6 +52,30 @@ def cat():
                                game_descriptions=description, game_links=links, game_img=img)
 
 
+@app.route('/video')
+def video():
+    db_file = 'db/sites_base.sqlite'
+    con = sqlite3.connect(db_file)
+    cur = con.cursor()
+    rows = len(cur.execute("SELECT * FROM sites WHERE type in ('Видео-уроки')").fetchall())
+    titles = cur.execute("SELECT name FROM sites WHERE type in ('Видео-уроки')").fetchall()
+    type = cur.execute("SELECT type FROM sites WHERE type in ('Видео-уроки')").fetchall()
+    age = cur.execute("SELECT age FROM sites WHERE type in ('Видео-уроки')").fetchall()
+    type_age = [type[i][0] + ', ' + age[i][0] for i in range(len(type))]
+    links = cur.execute("SELECT link FROM sites WHERE type in ('Видео-уроки')").fetchall()
+    img = cur.execute("SELECT img FROM sites WHERE type in ('Видео-уроки')").fetchall()  # width="237" height="151"
+    description = []
+    for i in titles:
+        from parsing_sites import connection
+        description.append(connection.pars(i[0]))
+    if act_name == 0:
+        return render_template('catalog.html', n=rows, game_names=titles, game_types=type_age,
+                               game_descriptions=description, game_links=links, game_img=img)
+    else:
+        return render_template('catalog_acc.html', form_name=act_name, n=rows, game_names=titles, game_types=type_age,
+                               game_descriptions=description, game_links=links, game_img=img)
+
+
 @app.route('/get-text', methods=['GET', 'POST'])
 def foo():
     global act_name

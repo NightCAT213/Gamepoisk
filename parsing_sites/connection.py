@@ -84,10 +84,10 @@ def pars(title):
         a = str(soup.find_all('div', itemtype="description"))
         a = a[a.find('-') + 2:-20].capitalize()
     if title == 'Сказки и головоломки для детей':
-        res = requests.get('https://5mod.ru/igry/child-game/20080-skazki-i-razvivajuschie-igry-dlja-detej-malyshej-2110-mod-polnaja-versija.html?ysclid=lgcddbisg430366613')
+        res = requests.get('https://playmodapp.ru/logical/4809-skazki-i-golovolomki-dlya-detey.html')
         soup = BeautifulSoup(res.text, 'lxml')
-        a = str(soup.find_all('div', itemtype="description"))
-        a = a[a.find('-') + 2:-20].capitalize()
+        a = str(soup.find_all('div', class_="p_content"))
+        a = a.split('<br/>')[0][29:]
     if title == 'ЛогикЛайк':
         a = 'ЛогикЛайк — первая и единственная онлайн-платформа для развития логики и математических способностей' \
             ' во всем русскоязычном интернете. Комплекс включает все известные способы решения задач и основывается ' \

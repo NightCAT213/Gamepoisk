@@ -41,9 +41,10 @@ def cat():
     description = []
     for i in titles:
         from parsing_sites import connection
-        description.append(connection.pars(i))
+        description.append(connection.pars(i[0]))
     if act_name == 0:
-        return render_template('catalog.html', n=rows)
+        return render_template('catalog.html', n=rows, game_names=titles, game_types=type_age,
+                               game_descriptions=description)
     else:
         return render_template('catalog_acc.html', form_name=act_name, n=1)
 

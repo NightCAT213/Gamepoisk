@@ -8,7 +8,6 @@ def pars(title):
         soup = BeautifulSoup(res.text, 'lxml')
         a = str(soup.find_all('div', class_='index_cont__8GUDo'))
         a = a[len('[<div class="index_cont__8GUDo">   '):-len('</div>]')]
-        print(a)
     if title == 'Играемся':
         res = requests.get('https://www.igraemsa.ru/')
         soup = BeautifulSoup(res.text, 'lxml')

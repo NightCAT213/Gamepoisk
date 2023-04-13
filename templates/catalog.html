@@ -44,9 +44,9 @@
             </div>
         </div>
     </div>
-    {% set names = {{ game_names }} %}
-    {% set types = {{ game_types }} %}
-    {% set descriptions = {{ game_descriptions }} %}
+    {% set names = game_names %}
+    {% set types = game_types %}
+    {% set descriptions = game_descriptions %}
     {% for i in range(n)%}<div class="card" style="margin: auto;margin-top: 40px;width: 90%;">
         <div class="card-body">
             <!-- Start: 1 Row 2 Columns -->

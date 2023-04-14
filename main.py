@@ -40,9 +40,9 @@ def cat():
     cur = con.cursor()
     rows = len(cur.execute("SELECT * FROM sites").fetchall())
     titles = cur.execute("SELECT name FROM sites").fetchall()
-    type = cur.execute("SELECT type FROM sites").fetchall()
+    type__ = cur.execute("SELECT type FROM sites").fetchall()
     age = cur.execute("SELECT age FROM sites").fetchall()
-    type_age = [type[i][0] + ', ' + age[i][0] for i in range(len(type))]
+    type_age = [type__[i][0] + ', ' + age[i][0] for i in range(len(type__))]
     links = cur.execute("SELECT link FROM sites").fetchall()
     img = cur.execute("SELECT img FROM sites").fetchall()
     description = []
@@ -64,9 +64,9 @@ def video():
     cur = con.cursor()
     rows = len(cur.execute("SELECT * FROM sites WHERE type in ('Видео-уроки')").fetchall())
     titles = cur.execute("SELECT name FROM sites WHERE type in ('Видео-уроки')").fetchall()
-    type = cur.execute("SELECT type FROM sites WHERE type in ('Видео-уроки')").fetchall()
+    type__ = cur.execute("SELECT type FROM sites WHERE type in ('Видео-уроки')").fetchall()
     age = cur.execute("SELECT age FROM sites WHERE type in ('Видео-уроки')").fetchall()
-    type_age = [type[i][0] + ', ' + age[i][0] for i in range(len(type))]
+    type_age = [type__[i][0] + ', ' + age[i][0] for i in range(len(type__))]
     links = cur.execute("SELECT link FROM sites WHERE type in ('Видео-уроки')").fetchall()
     img = cur.execute("SELECT img FROM sites WHERE type in ('Видео-уроки')").fetchall()
     description = []
@@ -88,9 +88,9 @@ def games():
     cur = con.cursor()
     rows = len(cur.execute("SELECT * FROM sites WHERE type in ('Игры')").fetchall())
     titles = cur.execute("SELECT name FROM sites WHERE type in ('Игры')").fetchall()
-    type = cur.execute("SELECT type FROM sites WHERE type in ('Игры')").fetchall()
+    type__ = cur.execute("SELECT type FROM sites WHERE type in ('Игры')").fetchall()
     age = cur.execute("SELECT age FROM sites WHERE type in ('Игры')").fetchall()
-    type_age = [type[i][0] + ', ' + age[i][0] for i in range(len(type))]
+    type_age = [type__[i][0] + ', ' + age[i][0] for i in range(len(type__))]
     links = cur.execute("SELECT link FROM sites WHERE type in ('Игры')").fetchall()
     img = cur.execute("SELECT img FROM sites WHERE type in ('Игры')").fetchall()  # width="237" height="151"
     description = []
@@ -112,9 +112,9 @@ def less():
     cur = con.cursor()
     rows = len(cur.execute("SELECT * FROM sites WHERE type in ('Развлекательные занятия')").fetchall())
     titles = cur.execute("SELECT name FROM sites WHERE type in ('Развлекательные занятия')").fetchall()
-    type = cur.execute("SELECT type FROM sites WHERE type in ('Развлекательные занятия')").fetchall()
+    type__ = cur.execute("SELECT type FROM sites WHERE type in ('Развлекательные занятия')").fetchall()
     age = cur.execute("SELECT age FROM sites WHERE type in ('Развлекательные занятия')").fetchall()
-    type_age = [type[i][0] + ', ' + age[i][0] for i in range(len(type))]
+    type_age = [type__[i][0] + ', ' + age[i][0] for i in range(len(type__))]
     links = cur.execute("SELECT link FROM sites WHERE type in ('Развлекательные занятия')").fetchall()
     img = cur.execute("SELECT img FROM sites WHERE type in ('Развлекательные занятия')").fetchall()
     description = []
@@ -136,9 +136,9 @@ def two_three():
     cur = con.cursor()
     rows = len(cur.execute("SELECT * FROM sites WHERE age in ('от 2-3 лет')").fetchall())
     titles = cur.execute("SELECT name FROM sites WHERE age in ('от 2-3 лет')").fetchall()
-    type = cur.execute("SELECT type FROM sites WHERE age in ('от 2-3 лет')").fetchall()
+    type__ = cur.execute("SELECT type FROM sites WHERE age in ('от 2-3 лет')").fetchall()
     age = cur.execute("SELECT age FROM sites WHERE age in ('от 2-3 лет')").fetchall()
-    type_age = [type[i][0] + ', ' + age[i][0] for i in range(len(type))]
+    type_age = [type__[i][0] + ', ' + age[i][0] for i in range(len(type__))]
     links = cur.execute("SELECT link FROM sites WHERE age in ('от 2-3 лет')").fetchall()
     img = cur.execute("SELECT img FROM sites WHERE age in ('от 2-3 лет')").fetchall()
     description = []
@@ -160,9 +160,9 @@ def three_four():
     cur = con.cursor()
     rows = len(cur.execute("SELECT * FROM sites WHERE age in ('от 3-4 лет')").fetchall())
     titles = cur.execute("SELECT name FROM sites WHERE age in ('от 3-4 лет')").fetchall()
-    type = cur.execute("SELECT type FROM sites WHERE age in ('от 3-4 лет')").fetchall()
+    type__ = cur.execute("SELECT type FROM sites WHERE age in ('от 3-4 лет')").fetchall()
     age = cur.execute("SELECT age FROM sites WHERE age in ('от 3-4 лет')").fetchall()
-    type_age = [type[i][0] + ', ' + age[i][0] for i in range(len(type))]
+    type_age = [type__[i][0] + ', ' + age[i][0] for i in range(len(type__))]
     links = cur.execute("SELECT link FROM sites WHERE age in ('от 3-4 лет')").fetchall()
     img = cur.execute("SELECT img FROM sites WHERE age in ('от 3-4 лет')").fetchall()
     description = []
@@ -184,9 +184,9 @@ def four_five():
     cur = con.cursor()
     rows = len(cur.execute("SELECT * FROM sites WHERE age in ('от 4-5 лет')").fetchall())
     titles = cur.execute("SELECT name FROM sites WHERE age in ('от 4-5 лет')").fetchall()
-    type = cur.execute("SELECT type FROM sites WHERE age in ('от 4-5 лет')").fetchall()
+    type__ = cur.execute("SELECT type FROM sites WHERE age in ('от 4-5 лет')").fetchall()
     age = cur.execute("SELECT age FROM sites WHERE age in ('от 4-5 лет')").fetchall()
-    type_age = [type[i][0] + ', ' + age[i][0] for i in range(len(type))]
+    type_age = [type__[i][0] + ', ' + age[i][0] for i in range(len(type__))]
     links = cur.execute("SELECT link FROM sites WHERE age in ('от 4-5 лет')").fetchall()
     img = cur.execute("SELECT img FROM sites WHERE age in ('от 4-5 лет')").fetchall()
     description = []

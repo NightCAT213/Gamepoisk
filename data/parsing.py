@@ -1,9 +1,8 @@
-from bs4 import BeautifulSoup
-import requests
+import sqlite3
 
-res = requests.get('https://playmodapp.ru/logical/4809-skazki-i-golovolomki-dlya-detey.html')
-soup = BeautifulSoup(res.text, 'lxml')
-a = str(soup.find_all('div', class_="p_content"))
-a = a.split('<br/>')[0][29:]
-print(a)
+db_file = '../db/users_base.sqlite'
+con = sqlite3.connect(db_file)
+cur = con.cursor()
+res = cur.execute(f"SELECT history FROM users WHERE name = 'ol'").fetchall()
+print(res[0][0])
 

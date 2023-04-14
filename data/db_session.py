@@ -46,7 +46,7 @@ def add_user(nameus, passwordus, session):
     c = User(name=nameus, password=passwordus)
     session.add(c)
     session.commit()
-    return nameus
+    return nameus, passwordus
 
 
 def check_user(login, password, session):

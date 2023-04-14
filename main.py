@@ -2,9 +2,10 @@ from flask import Flask, render_template, request
 import sqlite3
 app = Flask(__name__)
 act_name = 0
+act_pass = 0
 
 
-@app.route('/update')
+@app.route('/update')  # обновление данных каталога
 def update():
     db_file = 'db/sites_base.sqlite'
     con = sqlite3.connect(db_file)
@@ -32,7 +33,6 @@ def update():
                                game_descriptions=description, game_links=links, game_img=img)
 
 
-
 @app.route('/')  # главная страница без аккаунта
 def index():
     global act_name
@@ -44,15 +44,26 @@ def index():
 
 @app.route('/search', methods=['GET', 'POST'])  # поиск и переход в каталог
 def search():
+    global act_name, act_pass
     sc = request.form['sear']
-    print(sc)
+    db_file = 'db/users_base.sqlite'
+    con = sqlite3.connect(db_file)
+    cur = con.cursor()
+    if act_name != 0 and act_pass != 0:
+        old_his = cur.execute(f"SELECT history FROM users WHERE name = '{act_name}' AND password = '{act_pass}'").fetchall()
+        if str(old_his[0][0]) != 'None':
+            new_his = str(old_his[0][0]) + ', ' + sc
+        else:
+            new_his = sc
+        data = (new_his, act_name, act_pass)
+        cur.execute("UPDATE users SET history = ? WHERE name = ? AND password = ?", data)
+        con.commit()
+    cur.close()
     db_file = 'db/sites_base.sqlite'
     con = sqlite3.connect(db_file)
     cur = con.cursor()
     res_name = cur.execute(f'SELECT * FROM sites WHERE name LIKE "%{sc}%"').fetchall()
     res_type = cur.execute(f'SELECT * FROM sites WHERE type LIKE "%{sc}%"').fetchall()
-    print(res_name)
-    print(res_type)
     if res_type:
         rows = len(cur.execute(f"SELECT * FROM sites WHERE type LIKE '%{sc}%'").fetchall())
         titles = cur.execute(f"SELECT name FROM sites WHERE type LIKE '%{sc}%'").fetchall()
@@ -78,7 +89,6 @@ def search():
         links = cur.execute(f"SELECT link FROM sites WHERE name LIKE '%{sc}%'").fetchall()
         img = cur.execute(f"SELECT img FROM sites WHERE name LIKE '%{sc}%'").fetchall()
         description = cur.execute(f"SELECT descrip FROM sites WHERE name LIKE '%{sc}%'").fetchall()
-        print(description)
         if act_name == 0:
             return render_template('catalog.html', n=rows, game_names=titles, game_types=type_age,
                                    game_descriptions=description, game_links=links, game_img=img)
@@ -100,7 +110,14 @@ def login():
 
 @app.route('/account')  # страница выхода из аккаунта
 def account():
-    return render_template('accountswitch.html', form_name=act_name)
+    global act_name, act_pass
+    db_file = 'db/users_base.sqlite'
+    con = sqlite3.connect(db_file)
+    cur = con.cursor()
+    res = cur.execute(f"SELECT history FROM users WHERE name = '{act_name}' AND password = '{act_pass}'").fetchall()
+    if str(res[0][0]) != 'None':
+        return render_template('accountswitch.html', form_name=act_name, his=res[0][0])
+    return render_template('accountswitch.html', form_name=act_name, his='История отсутствует')
 
 
 @app.route('/signin')  # страница регистрации
@@ -257,7 +274,7 @@ def four_five():
 
 @app.route('/get-text', methods=['GET', 'POST'])  # регистрация, получение логина и пароля
 def foo():
-    global act_name
+    global act_name, act_pass
     check = ''
     bar = request.form['login']
     bur = request.form['password']
@@ -274,7 +291,7 @@ def foo():
     session = db_session.create_session()
     check = db_session.check_user(bar, bur, session)
     if check == '':
-        act_name = db_session.add_user(bar, bur, session) + '  '
+        act_name, act_pass = db_session.add_user(bar, bur, session)
         return render_template('hpage_acc.html', form_name=act_name)
     else:
         return render_template('signinpage.html', fail_sign=check)
@@ -282,7 +299,7 @@ def foo():
 
 @app.route('/get-text2', methods=['GET', 'POST'])  # вход, получение логина и пароля
 def you():
-    global act_name
+    global act_name, act_pass
     check = ''
     bar = request.form['login']
     bur = request.form['password']
@@ -294,28 +311,32 @@ def you():
         check = 'Такого пользователя не существует'
         return render_template('loginpage.html', fail_log=check)
     else:
-        act_name = bar + '  '
+        act_name = bar
+        act_pass = bur
         return render_template('hpage_acc.html', form_name=act_name)
 
 
 @app.route('/h', methods=['GET', 'POST'])  # просто выход из аккаунта
 def h():
-    global act_name
+    global act_name, act_pass
     act_name = 0
+    act_pass = 0
     return render_template('homepage.html')
 
 
 @app.route('/s', methods=['GET', 'POST'])  # выход в регистрацию
 def s():
-    global act_name
+    global act_name, act_pass
     act_name = 0
+    act_pass = 0
     return render_template('signinpage.html', fail_sign='')
 
 
 @app.route('/l', methods=['GET', 'POST'])  # выход в авторизацию
 def lo():
-    global act_name
+    global act_name, act_pass
     act_name = 0
+    act_pass = 0
     return render_template('loginpage.html', fail_log='')
 
 

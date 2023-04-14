@@ -5,16 +5,17 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>catalog</title>
-    <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css?h=f1a8fe9e98944b9d682ec5c3efac8f17">
-    <link rel="stylesheet" href="/assets/css/Andika.css?h=cf52a75be5050a03fae55e5c7e2b94ce">
+    <link rel="stylesheet" href="/static/assets/bootstrap/css/bootstrap.min.css?h=f1a8fe9e98944b9d682ec5c3efac8f17">
+    <link rel="stylesheet" href="/static/assets/css/Andika.css?h=cf52a75be5050a03fae55e5c7e2b94ce">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
 </head>
 
-<body style="background: url(&quot;/assets/img/background.png?h=2dd4416b8f2f3830236ee9f0012313f8&quot;);height: 756px;font-family: sans-serif;">
+<body style="background: url(/static/assets/img/background.png);height: 756px;font-family: sans-serif;">
     <!-- Start: Navbar Right Links (Dark) -->
     <nav class="navbar navbar-dark navbar-expand-md bg-dark py-3">
-        <div class="container"><img width="39" height="37" src="/assets/img/horse.png?h=3acc8fcf85ea3348cdaf10744dcc706c"><a class="navbar-brand d-flex align-items-center" href="#"><span>GamePoisk</span></a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-5"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
-            <div class="collapse navbar-collapse" id="navcol-5"><input type="search"><button class="btn btn-primary btn-info" type="button"><i class="fas fa-search"></i></button>
+        <div class="container"><img width="39" height="37" src="/static/assets/img/horse.png?h=3acc8fcf85ea3348cdaf10744dcc706c"><a class="navbar-brand d-flex align-items-center" href="#"><span>GamePoisk</span></a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-5"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navcol-5">
+                <form action="/search" method="POST"><input type="search" name="sear"><button class="btn btn-primary btn-info" type="submit"><i class="fas fa-search"></i></button></form>
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link active" href="#">Каталог</a></li>
                     <li class="nav-item"></li>

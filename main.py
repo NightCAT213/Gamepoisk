@@ -63,7 +63,7 @@ def search():
                                    game_types=type_age,
                                    game_descriptions=description, game_links=links, game_img=img)
     if res_name is not True and res_type is not True:
-        pass
+        return render_template('fail_search.html')
 
 
 @app.route('/login')  # страница авторизации

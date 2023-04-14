@@ -26,7 +26,7 @@
     </nav><!-- End: Navbar Right Links (Dark) -->
     <div class="card d-flex" style="width: 90%;margin: auto;background: #212529;margin-top: -3px;">
         <div class="card-body" style="height: 20%;">
-            <h4 class="card-title" style="color: var(--bs-card-bg);text-align: center;">Каталог</h4>
+            <h4 class="nav-link" style="color: var(--bs-card-bg);text-align: center;"><a href="/update">Каталог<small class="form-text">(нажмите, чтобы обновить)</small></a></h4>
             <div class="row">
                 <div class="col-lg-8">
                     <ul>
@@ -58,7 +58,7 @@
                     <div class="col-md-6" style="width: 70%;">
                         <h4>{{names[i][0]}}</h4>
                         <h6 class="text-muted mb-2">{{types[i]}}</h6>
-                        <p>{{game_descriptions[i]}}</p><a href="{{ links[i][0] }}">{{ links[i][0] }}</a>
+                        <p>{{game_descriptions[i][0]}}</p><a href="{{ links[i][0] }}">{{ links[i][0] }}</a>
                     </div>
                     <div class="col-md-6 col-lg-3" style="width: 30%;"><img style="max-width: 300px;max-height: 300px;" src="{{ img[i][0] }}"></div>
                 </div>

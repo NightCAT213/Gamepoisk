@@ -20,9 +20,50 @@ def search():
     db_file = 'db/sites_base.sqlite'
     con = sqlite3.connect(db_file)
     cur = con.cursor()
-    res = cur.execute(f'SELECT * FROM sites WHERE FREETEXT((name, type), {sc})').fetchall()
-    print(res)
-    return render_template('catalog.html')
+    res_name = cur.execute(f'SELECT * FROM sites WHERE name LIKE "%{sc}%"').fetchall()
+    res_type = cur.execute(f'SELECT * FROM sites WHERE type LIKE "%{sc}%"').fetchall()
+    print(res_name)
+    print(res_type)
+    if res_type:
+        rows = len(cur.execute(f"SELECT * FROM sites WHERE type LIKE '%{sc}%'").fetchall())
+        titles = cur.execute(f"SELECT name FROM sites WHERE type LIKE '%{sc}%'").fetchall()
+        type__ = cur.execute(f"SELECT type FROM sites WHERE type LIKE '%{sc}%'").fetchall()
+        age = cur.execute(f"SELECT age FROM sites WHERE type LIKE '%{sc}%'").fetchall()
+        type_age = [type__[i][0] + ', ' + age[i][0] for i in range(len(type__))]
+        links = cur.execute(f"SELECT link FROM sites WHERE type LIKE '%{sc}%'").fetchall()
+        img = cur.execute(f"SELECT img FROM sites WHERE type LIKE '%{sc}%'").fetchall()
+        description = []
+        for i in titles:
+            from parsing_sites import connection
+            description.append(connection.pars(i[0]))
+        if act_name == 0:
+            return render_template('catalog.html', n=rows, game_names=titles, game_types=type_age,
+                                   game_descriptions=description, game_links=links, game_img=img)
+        else:
+            return render_template('catalog_acc.html', form_name=act_name, n=rows, game_names=titles,
+                                   game_types=type_age,
+                                   game_descriptions=description, game_links=links, game_img=img)
+    if res_name:
+        rows = len(cur.execute(f'SELECT * FROM sites WHERE name LIKE "%{sc}%"').fetchall())
+        titles = cur.execute(f'SELECT name FROM sites WHERE name LIKE "%{sc}%"').fetchall()
+        type__ = cur.execute(f"SELECT type FROM sites WHERE name LIKE '%{sc}%'").fetchall()
+        age = cur.execute(f"SELECT age FROM sites WHERE name LIKE '%{sc}%'").fetchall()
+        type_age = [type__[i][0] + ', ' + age[i][0] for i in range(len(type__))]
+        links = cur.execute(f"SELECT link FROM sites WHERE name LIKE '%{sc}%'").fetchall()
+        img = cur.execute(f"SELECT img FROM sites WHERE name LIKE '%{sc}%'").fetchall()
+        description = []
+        for i in titles:
+            from parsing_sites import connection
+            description.append(connection.pars(i[0]))
+        if act_name == 0:
+            return render_template('catalog.html', n=rows, game_names=titles, game_types=type_age,
+                                   game_descriptions=description, game_links=links, game_img=img)
+        else:
+            return render_template('catalog_acc.html', form_name=act_name, n=rows, game_names=titles,
+                                   game_types=type_age,
+                                   game_descriptions=description, game_links=links, game_img=img)
+    if res_name is not True and res_type is not True:
+        pass
 
 
 @app.route('/login')  # страница авторизации

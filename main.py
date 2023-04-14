@@ -4,7 +4,7 @@ app = Flask(__name__)
 act_name = 0
 
 
-@app.route('/')
+@app.route('/')  # главная страница без аккаунта
 def index():
     global act_name
     if act_name == 0:
@@ -13,22 +13,27 @@ def index():
         return render_template('hpage_acc.html', form_name=act_name)
 
 
-@app.route('/login')
+@app.route('/search', methods=['GET', 'POST'])  # поиск и переход в каталог
+def search():
+    pass
+
+
+@app.route('/login')  # страница авторизации
 def login():
     return render_template('loginpage.html', fail_log='')
 
 
-@app.route('/account')
+@app.route('/account')  # страница выхода из аккаунта
 def account():
     return render_template('accountswitch.html', form_name=act_name)
 
 
-@app.route('/signin')
+@app.route('/signin')  # страница регистрации
 def sign():
     return render_template('signinpage.html', fail_sign='')
 
 
-@app.route('/katalog')
+@app.route('/katalog')  # страница каталога
 def cat():
     db_file = 'db/sites_base.sqlite'
     con = sqlite3.connect(db_file)
@@ -39,7 +44,7 @@ def cat():
     age = cur.execute("SELECT age FROM sites").fetchall()
     type_age = [type[i][0] + ', ' + age[i][0] for i in range(len(type))]
     links = cur.execute("SELECT link FROM sites").fetchall()
-    img = cur.execute("SELECT img FROM sites").fetchall() # width="237" height="151"
+    img = cur.execute("SELECT img FROM sites").fetchall()
     description = []
     for i in titles:
         from parsing_sites import connection
@@ -52,7 +57,7 @@ def cat():
                                game_descriptions=description, game_links=links, game_img=img)
 
 
-@app.route('/video')
+@app.route('/video')  # каталог-видео
 def video():
     db_file = 'db/sites_base.sqlite'
     con = sqlite3.connect(db_file)
@@ -63,7 +68,7 @@ def video():
     age = cur.execute("SELECT age FROM sites WHERE type in ('Видео-уроки')").fetchall()
     type_age = [type[i][0] + ', ' + age[i][0] for i in range(len(type))]
     links = cur.execute("SELECT link FROM sites WHERE type in ('Видео-уроки')").fetchall()
-    img = cur.execute("SELECT img FROM sites WHERE type in ('Видео-уроки')").fetchall()  # width="237" height="151"
+    img = cur.execute("SELECT img FROM sites WHERE type in ('Видео-уроки')").fetchall()
     description = []
     for i in titles:
         from parsing_sites import connection
@@ -76,7 +81,7 @@ def video():
                                game_descriptions=description, game_links=links, game_img=img)
 
 
-@app.route('/games')
+@app.route('/games')  # каталог-игры
 def games():
     db_file = 'db/sites_base.sqlite'
     con = sqlite3.connect(db_file)
@@ -100,7 +105,7 @@ def games():
                                game_descriptions=description, game_links=links, game_img=img)
 
 
-@app.route('/less')
+@app.route('/less')  # каталог-занятия
 def less():
     db_file = 'db/sites_base.sqlite'
     con = sqlite3.connect(db_file)
@@ -111,7 +116,7 @@ def less():
     age = cur.execute("SELECT age FROM sites WHERE type in ('Развлекательные занятия')").fetchall()
     type_age = [type[i][0] + ', ' + age[i][0] for i in range(len(type))]
     links = cur.execute("SELECT link FROM sites WHERE type in ('Развлекательные занятия')").fetchall()
-    img = cur.execute("SELECT img FROM sites WHERE type in ('Развлекательные занятия')").fetchall()  # width="237" height="151"
+    img = cur.execute("SELECT img FROM sites WHERE type in ('Развлекательные занятия')").fetchall()
     description = []
     for i in titles:
         from parsing_sites import connection
@@ -124,7 +129,7 @@ def less():
                                game_descriptions=description, game_links=links, game_img=img)
 
 
-@app.route('/two-three')
+@app.route('/two-three')  # каталог-2-3
 def two_three():
     db_file = 'db/sites_base.sqlite'
     con = sqlite3.connect(db_file)
@@ -135,7 +140,7 @@ def two_three():
     age = cur.execute("SELECT age FROM sites WHERE age in ('от 2-3 лет')").fetchall()
     type_age = [type[i][0] + ', ' + age[i][0] for i in range(len(type))]
     links = cur.execute("SELECT link FROM sites WHERE age in ('от 2-3 лет')").fetchall()
-    img = cur.execute("SELECT img FROM sites WHERE age in ('от 2-3 лет')").fetchall()  # width="237" height="151"
+    img = cur.execute("SELECT img FROM sites WHERE age in ('от 2-3 лет')").fetchall()
     description = []
     for i in titles:
         from parsing_sites import connection
@@ -148,7 +153,7 @@ def two_three():
                                game_descriptions=description, game_links=links, game_img=img)
 
 
-@app.route('/three-four')
+@app.route('/three-four')  # каталог-3-4
 def three_four():
     db_file = 'db/sites_base.sqlite'
     con = sqlite3.connect(db_file)
@@ -159,7 +164,7 @@ def three_four():
     age = cur.execute("SELECT age FROM sites WHERE age in ('от 3-4 лет')").fetchall()
     type_age = [type[i][0] + ', ' + age[i][0] for i in range(len(type))]
     links = cur.execute("SELECT link FROM sites WHERE age in ('от 3-4 лет')").fetchall()
-    img = cur.execute("SELECT img FROM sites WHERE age in ('от 3-4 лет')").fetchall()  # width="237" height="151"
+    img = cur.execute("SELECT img FROM sites WHERE age in ('от 3-4 лет')").fetchall()
     description = []
     for i in titles:
         from parsing_sites import connection
@@ -172,7 +177,7 @@ def three_four():
                                game_descriptions=description, game_links=links, game_img=img)
 
 
-@app.route('/four-five')
+@app.route('/four-five')  # каталог-4-5
 def four_five():
     db_file = 'db/sites_base.sqlite'
     con = sqlite3.connect(db_file)
@@ -183,7 +188,7 @@ def four_five():
     age = cur.execute("SELECT age FROM sites WHERE age in ('от 4-5 лет')").fetchall()
     type_age = [type[i][0] + ', ' + age[i][0] for i in range(len(type))]
     links = cur.execute("SELECT link FROM sites WHERE age in ('от 4-5 лет')").fetchall()
-    img = cur.execute("SELECT img FROM sites WHERE age in ('от 4-5 лет')").fetchall()  # width="237" height="151"
+    img = cur.execute("SELECT img FROM sites WHERE age in ('от 4-5 лет')").fetchall()
     description = []
     for i in titles:
         from parsing_sites import connection
@@ -196,7 +201,7 @@ def four_five():
                                game_descriptions=description, game_links=links, game_img=img)
 
 
-@app.route('/get-text', methods=['GET', 'POST'])
+@app.route('/get-text', methods=['GET', 'POST'])  # регистрация, получение логина и пароля
 def foo():
     global act_name
     check = ''
@@ -221,7 +226,7 @@ def foo():
         return render_template('signinpage.html', fail_sign=check)
 
 
-@app.route('/get-text2', methods=['GET', 'POST'])
+@app.route('/get-text2', methods=['GET', 'POST'])  # вход, получение логина и пароля
 def you():
     global act_name
     check = ''
@@ -239,21 +244,21 @@ def you():
         return render_template('hpage_acc.html', form_name=act_name)
 
 
-@app.route('/h', methods=['GET', 'POST'])
+@app.route('/h', methods=['GET', 'POST'])  # просто выход из аккаунта
 def h():
     global act_name
     act_name = 0
     return render_template('homepage.html')
 
 
-@app.route('/s', methods=['GET', 'POST'])
+@app.route('/s', methods=['GET', 'POST'])  # выход в регистрацию
 def s():
     global act_name
     act_name = 0
     return render_template('signinpage.html', fail_sign='')
 
 
-@app.route('/l', methods=['GET', 'POST'])
+@app.route('/l', methods=['GET', 'POST'])  # выход в авторизацию
 def lo():
     global act_name
     act_name = 0

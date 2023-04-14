@@ -15,7 +15,7 @@
     <nav class="navbar navbar-dark navbar-expand-md bg-dark py-3">
         <div class="container"><img width="39" height="37" src="/static/assets/img/horse.png?h=24652d9c5df985f68b20e149f2f8ee97"><a class="navbar-brand d-flex align-items-center" href="/"><span>GamePoisk</span></a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-5"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navcol-5">
-                    <input type="search"><a class="btn btn-primary btn-info" type="button" href="/catalog"><i class="fas fa-search"></i></a>
+                <form action="/search" method="POST"><input type="search" name="search_in"><a class="btn btn-primary btn-info" type="submit" href="#"><i class="fas fa-search"></i></a></form>
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link active" href="/katalog">Каталог</a></li>
                     <li class="nav-item"></li>

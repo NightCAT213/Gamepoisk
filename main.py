@@ -20,7 +20,7 @@ def search():
     db_file = 'db/sites_base.sqlite'
     con = sqlite3.connect(db_file)
     cur = con.cursor()
-    res = cur.execute(f'SELECT name FROM sites WHERE FREETEXT(name, "{sc}")').fetchall()
+    res = cur.execute(f'SELECT * FROM sites WHERE FREETEXT((name, type), {sc})').fetchall()
     print(res)
     return render_template('catalog.html')
 

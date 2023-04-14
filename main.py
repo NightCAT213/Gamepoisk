@@ -15,7 +15,14 @@ def index():
 
 @app.route('/search', methods=['GET', 'POST'])  # поиск и переход в каталог
 def search():
-    pass
+    sc = request.form['sear']
+    print(sc)
+    db_file = 'db/sites_base.sqlite'
+    con = sqlite3.connect(db_file)
+    cur = con.cursor()
+    res = cur.execute(f'SELECT name FROM sites WHERE FREETEXT(name, "{sc}")').fetchall()
+    print(res)
+    return render_template('catalog.html')
 
 
 @app.route('/login')  # страница авторизации

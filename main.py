@@ -100,7 +100,7 @@ def search():
         if act_name == 0:
             return render_template('fail_search.html')
         else:
-            return render_template('fail_search.html', form_name=act_name)
+            return render_template('fail_acc.html', form_name=act_name)
 
 
 @app.route('/login')  # страница авторизации
